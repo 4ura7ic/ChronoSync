@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="sync_neutral">#333333</color>
+    <color name="sync_green">#195221</color>
+    <color name="sync_amber">#755507</color>
+    <color name="sync_red">#701B1B</color>
+    <color name="day_sky_blue">#000d85</color>
+    <color name="night_black">#1C1C1C</color>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ChronoSync</string>
+    <string name="credits_label">Developed in collaboration with Google\'s Gemini</string>
+    <string name="version_label">Version %1$s</string>
+    <string name="explanation_internal_clock">NTP sync failed. Displaying device time, which may be inaccurate.</string>
+    <string name="explanation_offset">"Offset" is your device clock\'s error in milliseconds.</string>
+</resources>
