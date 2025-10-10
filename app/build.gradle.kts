@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.ntpwatchsync"
+        applicationId = "com.chronosync.app"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

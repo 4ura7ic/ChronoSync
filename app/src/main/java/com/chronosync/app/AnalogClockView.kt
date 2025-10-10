@@ -54,7 +54,7 @@ class AnalogClockView @JvmOverloads constructor(
     }
     private val datePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.WHITE
-        textSize = 55f
+        textSize = 50f
         textAlign = Paint.Align.LEFT
         typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
     }
