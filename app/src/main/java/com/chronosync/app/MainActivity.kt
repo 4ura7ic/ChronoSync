@@ -144,7 +144,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun startTimer() { timerJob?.cancel(); timerJob = lifecycleScope.launch(Dispatchers.Default) { while (isActive) { val correctedTimeMillis = System.currentTimeMillis() + latestNtpOffset; launch(Dispatchers.Main) { analogClockView.updateTime(correctedTimeMillis) }; if (isGtsPipsEnabled) { val calendar = Calendar.getInstance(); calendar.timeInMillis = correctedTimeMillis; val seconds = calendar.get(Calendar.SECOND); if (seconds != lastPipSecond) { when (seconds) { 55, 56, 57, 58, 59 -> { playPip(false); lastPipSecond = seconds }; 0 -> { playPip(true); vibrate(); lastPipSecond = seconds }; 1 -> { lastPipSecond = -1 } } } }; delay(50) } } }
     private fun stopTimer() { timerJob?.cancel(); timerJob = null }
-    private fun convertDisplayTzToSystemTz(displayTz: String): String { if (displayTz == "UTC+0") return "UTC"; val offset = displayTz.removePrefix("UTC").toIntOrNull() ?: 0; return "Etc/GMT${-offset}" }
+    private fun convertDisplayTzToSystemTz(displayTz: String): String {
+        if (displayTz == "UTC+0") return "UTC"
+
+        val offset = displayTz.removePrefix("UTC").toIntOrNull() ?: 0
+        // The Etc/GMT standard has an inverted sign.
+        val gmtOffset = -offset
+
+        // The fix is here: explicitly add a '+' for positive numbers.
+        return if (gmtOffset >= 0) {
+            "Etc/GMT+$gmtOffset"
+        } else {
+            "Etc/GMT$gmtOffset"
+        }
+    }
     private fun convertSystemTzToDisplayTz(systemTz: String): String { if (systemTz == "UTC") return "UTC+0"; val offset = systemTz.removePrefix("Etc/GMT").toIntOrNull() ?: 0; val displayOffset = -offset; return if (displayOffset >= 0) "UTC+$displayOffset" else "UTC$displayOffset" }
 
     private fun performNtpSync() {
